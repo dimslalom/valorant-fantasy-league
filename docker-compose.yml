@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # The Database Service
+  db:
+    image: postgres:15-alpine
+    container_name: valo_fantasy_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: valorant_fantasy
+    ports:
+      - "5433:5432"
+    volumes:
+      # This saves your data in a folder named 'postgres_data' inside your project.
+      # If you delete this folder, you reset your database to fresh.
+      - ./postgres_data:/var/lib/postgresql/data
+
+  # Optional: A GUI to view your DB (like PHPMyAdmin but for Postgres)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: valo_fantasy_gui
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    depends_on:
+      - db

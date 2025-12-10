@@ -1,5 +1,5 @@
-from database import engine, Base
-from models import User, PlayerCard
+from .database import engine, Base
+from .models import User, PlayerCard
 
 def init_db():
     # Create all tables in the database

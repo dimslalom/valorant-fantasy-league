@@ -1,5 +1,5 @@
-from database import SessionLocal
-from models import User, PlayerCard
+from .database import SessionLocal
+from .models import User, PlayerCard
 
 def seed_data():
     print("Starting seed process...")

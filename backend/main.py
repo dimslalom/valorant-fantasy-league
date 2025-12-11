@@ -1,11 +1,21 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session, joinedload
 from .database import SessionLocal, engine
 from .models import User
 from .schemas import UserSchema
 
-#initialize the app
+# Initialize the app
 app = FastAPI()
+
+# Middleware configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:5173"], # Allow frontend origin
+    allow_credentials=True,
+    allow_methods=["*"], # allow all methods
+    allow_headers=["*"],
+)
 
 # Dependency to get DB session
 def get_db():
